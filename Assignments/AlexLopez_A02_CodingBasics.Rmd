@@ -31,12 +31,18 @@ This exercise accompanies the lessons/labs in Environmental Data Analytics on co
 4.  Insert comments in your code to describe what you are doing.
 
 ```{r basics 1}
-#1. seq
+#1.
+seq(1, 55, 5) #sequence function seq(from, to, by)
+
+five_sequence <- seq(1, 55, 5) #name sequence function
+five_sequence #call sequence function
 
 #2. 
+mean(five_sequence) #compute mean of sequence
+median(five_sequence) #compute median of sequence
 
 #3. 
-
+mean(five_sequence) > median(five_sequence) #output will be TRUE if statement is true, FALSE if statement is false
 ```
 
 ## Basics, Part 2
@@ -56,14 +62,9 @@ test_scores <- c(100, 95, 90, 85)
 on_scholarship <- c(TRUE, TRUE, FALSE, FALSE)
 
 #6.
-#student_names outputs student names
-class(student_names)
-
-#test_scores outputs each student's test scores
-class(test_scores)
-
-#on_scholarship outputs whether the student is on a scholarship
-class(on_scholarship)
+class(student_names) #character vector
+class(test_scores) #numeric vector
+class(on_scholarship) #logical vector
 
 #7.
 df_students <- data.frame(student_names, test_scores, on_scholarship)
@@ -76,7 +77,7 @@ View(df_students)
 
 9.  QUESTION: How is this data frame different from a matrix?
 
-> Answer:
+> Answer: This data frame contains elements of different types, whereas a matrix can only contain elements of the same type.
 
 10. Create a function with one input. In this function, use `if`...`else` to evaluate the value of the input: if it is greater than 50, print the word "Pass"; otherwise print the word "Fail". 
 
@@ -99,7 +100,7 @@ function_one <- function(x) {
 
 #11. Create a function using ifelse()
 function_two <- function(x){
-  result <- ifelse(x>50, "Pass", "Fail")
+  result <- ifelse(x > 50, "Pass", "Fail")
   print(result)
 }
 
@@ -110,7 +111,7 @@ function_one(52.5)
 function_two(52.5)
 
 #13a. Run the first function with the vector of test scores
-function_one(test_scores)
+#function_one(test_scores) did not work for reason stated under #14.
 
 #13b. Run the second function with the vector of test scores
 function_two(test_scores)
@@ -118,7 +119,7 @@ function_two(test_scores)
 
 14. QUESTION: Which option of `if`...`else` vs. `ifelse` worked? Why? (Hint: search the web for "R vectorization")
 
-> Answer:
+> Answer: The 'ifelse' option worked, because using 'if' ... 'else' evaluates only one condition, whereas 'ifelse' evaluates the condition for each element contained in the vector. The 'if' ... 'else' option will try to evaluate the entire vector against the logical condition in one swwop, which then creates an error.
 
 
 **NOTE** Before knitting, you'll need to comment out the call to the function in Q13 that does not work. (A document can't knit if the code it contains causes an error!)
