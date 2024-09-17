@@ -32,17 +32,29 @@ This exercise accompanies the lessons/labs in Environmental Data Analytics on co
 
 ```{r basics 1}
 #1.
-seq(1, 55, 5) #sequence function seq(from, to, by)
 
-five_sequence <- seq(1, 55, 5) #name sequence function
-five_sequence #call sequence function
+#sequence function seq(from, to, by)
+seq(1, 55, 5) 
+
+#name sequence function
+five_sequence <- seq(1, 55, 5) 
+
+#call sequence function
+five_sequence 
 
 #2. 
-mean(five_sequence) #compute mean of sequence
-median(five_sequence) #compute median of sequence
+
+#compute mean of sequence
+mean(five_sequence) 
+
+#compute median of sequence
+median(five_sequence) 
 
 #3. 
-mean(five_sequence) > median(five_sequence) #output will be TRUE if statement is true, FALSE if statement is false
+
+#output will be TRUE if statement is true, FALSE if statement is false
+mean(five_sequence) > median(five_sequence) 
+
 ```
 
 ## Basics, Part 2
@@ -62,16 +74,17 @@ test_scores <- c(100, 95, 90, 85)
 on_scholarship <- c(TRUE, TRUE, FALSE, FALSE)
 
 #6.
-class(student_names) #character vector
-class(test_scores) #numeric vector
-class(on_scholarship) #logical vector
+class(student_names)  #character vector
+
+class(test_scores)  #numeric vector
+
+class(on_scholarship)  #logical vector
 
 #7.
 df_students <- data.frame(student_names, test_scores, on_scholarship)
 
 #8.
 names(df_students) <- c("Names", "Test Scores", "Scholarship Holder")
-View(df_students)
 
 ```
 
@@ -89,6 +102,7 @@ View(df_students)
 
 ```{r basics 3}
 #10. Create a function using if...else
+
 function_one <- function(x) {
   if(x > 50) {
     print("Pass")
@@ -99,21 +113,26 @@ function_one <- function(x) {
 }
 
 #11. Create a function using ifelse()
+
 function_two <- function(x){
   result <- ifelse(x > 50, "Pass", "Fail")
   print(result)
 }
 
 #12a. Run the first function with the value 52.5
+
 function_one(52.5)
 
 #12b. Run the second function with the value 52.5
+
 function_two(52.5)
 
 #13a. Run the first function with the vector of test scores
+
 #function_one(test_scores) did not work for reason stated under #14.
 
 #13b. Run the second function with the vector of test scores
+
 function_two(test_scores)
 ```
 
