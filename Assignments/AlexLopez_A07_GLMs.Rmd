@@ -206,8 +206,8 @@ july.temps.groups
 16.From the findings above, which lakes have the same mean temperature, statistically speaking, as Peter Lake? Does any lake have a mean temperature that is statistically distinct from all the other lakes?
 
 >Answer:
-Statistically speaking, only Paul Lake has the same mean temperature as Peter Lake. After extracting the groupings for pairwise relationships in a plot, we can identify which lakes have the same mean temperature, statistically speaking, by looking at those that share the same letters. In our case, only Paul Lake is in the same letter grouping as Peter Lake.
-After running the Tukey HSD function and looking at the p-values for all the pariwise relationships, we can observe that there is not one lake with a mean temperature that is statistically distinct from all the other lakes. Each lake has at least one other lake with which, together, their difference in means is not statistically distinct, because the p-value is greater than 0.05 for that pairing.
+Statistically speaking, Paul Lake and Ward Lake have the same mean temperature as Peter Lake. After extracting the groupings for pairwise relationships in a plot, we can identify which lakes have the same mean temperature, statistically speaking, by looking at those that share the same letters. In our case, Paul Lake and Ward Lake share the letter 'c' with Peter Lake. Moreover, the p-values for the pairwise relationships of Paul Lake-Peter Lake and Ward Lake-Peter Lake are greater than 0.05, which also leads us to state that, statistically speaking, Paul Lake and Ward Lake have the same mean temperature as Peter Lake.
+After running the Tukey HSD function and looking at the p-values for all the pariwise relationships, we can observe that there is not one lake with a mean temperature that is statistically distinct from all the other lakes. Each lake has at least one other lake with which, together, their difference in means is not statistically distinct, because the p-value is greater than 0.05 for that pairing. Also, in the HSD plot, there is not one lake that has a unique letter.
  
 
 17. If we were just looking at Peter Lake and Paul Lake. What's another test we might explore to see whether they have distinct mean temperatures? 
@@ -232,4 +232,4 @@ temps.twosample
 ```
 
 >Answer: 
-The null hypothesis states that the difference between the mean temperatures for Crampton Lake and Ward Lake is zero, and the alternative hypothesis states that the difference between the mean temperatures of both lakes is not zero. According to the t-test, the p-value is 0.2649, greater than 0.05, so we fail to reject the null hypothesis. In other words, the mean temperatures for Crampton Lake and Ward Lake are statistically the same.
+The null hypothesis states that the difference between the mean temperatures for Crampton Lake and Ward Lake is zero, and the alternative hypothesis states that the difference between the mean temperatures of both lakes is not zero. According to the t-test, the p-value is 0.2649, greater than 0.05, so we fail to reject the null hypothesis. In other words, the mean temperatures for Crampton Lake and Ward Lake are statistically the same. This matches the answer for part 16, where the HSD plot shows that the mean temperatures of for Crampton Lake and Ward Lake are statistically the same, because they both have the letter 'b'.
