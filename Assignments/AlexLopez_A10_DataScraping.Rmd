@@ -102,10 +102,10 @@ df.scraped.data <- data.frame(Water.System.Name = rep(Water.System.Name, 12),
                               Month = c("Jan", "May", "Sep", "Feb", "Jun", 
                                         "Oct", "Mar", "Jul", "Nov", "Apr", 
                                         "Aug", "Dec"),
-                              Year = rep(2023, 12))
+                              Year = rep(2023, 12)
+                              )
 
 #add date column
-
 df.scraped.data$Date <- 
   as.Date(paste(df.scraped.data$Year, df.scraped.data$Month, '01'), 
                                 format = '%Y %b %d')
@@ -113,9 +113,9 @@ df.scraped.data$Date <-
 #5 
 
 ggplot(df.scraped.data, aes(x = Date, y = MGD)) +
-  geom_line(color = "black") +
+  geom_line() +
   geom_point(color = "red") +
-  scale_x_date(date_labels = "%b", date_breaks = "1 month") +
+  scale_x_date(date_labels = "%B", date_breaks = "1 month") +
   labs(
     title = "Water Supply Withdrawals in Durham (2023)",
     x = "Month",
@@ -136,7 +136,8 @@ ggplot(df.scraped.data, aes(x = Date, y = MGD)) +
 #6. 
 
 scrape.fn <- function(the.pwsid, the.year){
-  the.website <- read_html(paste0('https://www.ncwater.org/WUDC/app/LWSP/report.php?pwsid=', 
+  the.website <- 
+    read_html(paste0('https://www.ncwater.org/WUDC/app/LWSP/report.php?pwsid=', 
                                   the.pwsid, '&year=', the.year))
   
   #set element address variables
@@ -156,11 +157,10 @@ scrape.fn <- function(the.pwsid, the.year){
     the.website %>% html_nodes(mgd.tag) %>% html_text()
   
   #create df from scraped data
-  df.lwsp <- data.frame("Month" = c("Jan", "May", "Sep", "Feb", "Jun", 
-                                        "Oct", "Mar", "Jul", "Nov", "Apr", 
-                                        "Aug", "Dec"),
-                             "Year" = rep(the.year,12),
-                             "Max Day Use" = as.numeric(the.mgd.value)) %>% 
+  df.lwsp <- data.frame("Month" = c("Jan", "May", "Sep", "Feb", "Jun", "Oct", 
+                                    "Mar", "Jul", "Nov", "Apr", "Aug", "Dec"),
+                        "Year" = rep(the.year,12),
+                        "Max Day Use" = as.numeric(the.mgd.value)) %>% 
   mutate(Water.System.Name = !!the.watersystem,
          PWSID = !!the.pwsid.number,
          Ownership = !!the.ownership,
@@ -178,6 +178,21 @@ scrape.fn <- function(the.pwsid, the.year){
 
 df.lwsp.durham <- scrape.fn('03-32-010',2015)
 view(df.lwsp.durham)
+
+ggplot(df.lwsp.durham, aes(x = Date, y = Max.Day.Use)) +
+  geom_line() +
+  geom_point(color = "red") +
+  labs(
+    title = "Water Supply Withdrawals in Durham (2015)",
+    x = "Month",
+    y = "Max Daily Withdrawals (MGD)"
+  ) +
+  scale_x_date(date_labels = "%B", date_breaks = "1 month") +
+  theme_gray() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5, face = "bold")
+  )
 
 ```
 
@@ -199,11 +214,11 @@ ggplot(df.combined, aes(x = Date, y = Max.Day.Use, color = Location)) +
   geom_line() +
   labs(
     title = "Water Supply Withdrawals in Durham and Asheville (2015)",
-    x = "Date",
+    x = "Month",
     y = "Max Daily Withdrawals (MGD)",
     color = "Location"
   ) +
-  scale_x_date(date_labels = "%b", date_breaks = "1 month") +
+  scale_x_date(date_labels = "%B", date_breaks = "1 month") +
   theme_gray() +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
@@ -227,7 +242,7 @@ df.list <- map2(rep('01-11-010', length(years)), years, scrape.fn)
 df.asheville.2018.2022 <- bind_rows(df.list)
 
 ggplot(df.asheville.2018.2022, aes(x = Date, y = Max.Day.Use)) +
-  geom_line(color = "black") +
+  geom_line() +
   geom_smooth(method = "loess", se = FALSE, color = "cyan") +
   labs(
     title = "Water Supply Withdrawals in Asheville (2018-2022)",
@@ -245,4 +260,4 @@ ggplot(df.asheville.2018.2022, aes(x = Date, y = Max.Day.Use)) +
 
 Question: Just by looking at the plot (i.e. not running statistics), does Asheville have a trend in water usage over time?
 > Answer:
->
+>According to the plot, it appears there is a slight increase in water usage from 2018 to 2022, with a dip starting in early 2020 and lasting until around summer 2021, after which there is a very slight increase over time.
